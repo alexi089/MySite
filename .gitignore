@@ -37,3 +37,6 @@ next-env.d.ts
 
 # python venv
 backend/.venv/
+
+# environment files
+.env.local
