@@ -7,17 +7,26 @@ const SKILLS = [
   {
     category: 'Frontend',
     items: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript'],
-    wide: true,
   },
   {
     category: 'Backend',
     items: ['FastAPI', 'Python', 'Node.js', 'PostgreSQL'],
-    wide: false,
   },
   {
-    category: 'Tools',
-    items: ['Vercel', 'Git', 'Figma', 'Docker'],
-    wide: false,
+    category: 'Languages',
+    items: ['Python', 'Java', 'Kotlin', 'C++'],
+  },
+  {
+    category: 'ML / AI',
+    items: ['TensorFlow', 'TensorFlow Lite', 'MobileBERT', 'HuggingFace'],
+  },
+  {
+    category: 'Mobile & AR',
+    items: ['Android Studio', 'Unity', 'AR Foundation'],
+  },
+  {
+    category: 'Tools & Systems',
+    items: ['Vercel', 'Git', 'Docker', 'Intel SGX'],
   },
 ]
 
@@ -37,9 +46,9 @@ export default function Skills() {
         </h2>
       </motion.div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 lg:gap-16 max-w-[700px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-16">
         {SKILLS.map((group, gi) => (
-          <div key={group.category} className={group.wide ? 'sm:col-span-1' : ''}>
+          <div key={group.category}>
             <p className="eyebrow text-ink/35 mb-3">{group.category}</p>
             <ul className="flex flex-col gap-2">
               {group.items.map((skill, si) => (

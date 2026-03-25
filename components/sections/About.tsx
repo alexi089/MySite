@@ -58,7 +58,7 @@ function ParticleCanvas() {
   return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
 }
 
-const INTERESTS = ['Hardstyle', 'Tennis', 'Paddle Sports', 'Gym', 'Travel', 'Competitive Gaming']
+const INTERESTS = ['Hardstyle', 'Tennis', 'Paddle Sports', 'Gym', 'Travel', 'Competitive Gaming', 'German', 'Aramaic']
 
 function RevealParagraph({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const { ref, inView } = useInView({ threshold: 0.3 })
@@ -96,24 +96,26 @@ export default function About() {
 
         <div>
           <RevealParagraph delay={0.1}>
-            I&apos;m <strong className="text-white/92">Alex Eshaya</strong> — a full-stack developer
-            with a simple rule:{' '}
+            I&apos;m <strong className="text-white/92">Alex Eshaya</strong> — a full-stack developer who
+            graduated from <strong className="text-white/92">Wayne State University</strong> with a CS
+            degree and a 3.80 GPA. My rule:{' '}
             <span className="text-accent font-medium">
               once I set my mind on something, it gets done.
             </span>
           </RevealParagraph>
 
           <RevealParagraph delay={0.2}>
-            Outside the terminal I&apos;m competing —{' '}
-            <strong className="text-white/92">tennis, paddle sports, video games.</strong> I run on{' '}
-            <strong className="text-white/92">hardstyle</strong>, lift heavy, and book flights when
-            the itch hits.
+            I spent a year abroad in{' '}
+            <strong className="text-white/92">Munich</strong> — picking up German to B2, building across
+            time zones, and proving that I can ship in any environment. I speak{' '}
+            <strong className="text-white/92">English, German, and Aramaic</strong>.
           </RevealParagraph>
 
           <RevealParagraph delay={0.3}>
             In software, I&apos;m always{' '}
-            <span className="text-accent font-medium">chasing the next idea.</span> Not for the
-            tech — for what it enables.
+            <span className="text-accent font-medium">chasing the next idea.</span> From ML models on
+            Android to agentic AI systems — I build things that go beyond the demo. Outside the
+            terminal: tennis, paddle sports, hardstyle, and competing at everything I touch.
           </RevealParagraph>
         </div>
 
