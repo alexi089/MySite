@@ -11,7 +11,7 @@ export default function Work() {
   const rest = projects.filter((p) => !p.featured)
 
   return (
-    <section ref={ref} className="bg-warm py-24 px-6 lg:px-20">
+    <section ref={ref} className="bg-warm py-16 lg:py-24 px-5 lg:px-20">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -28,7 +28,7 @@ export default function Work() {
             href={featured.url ?? '#'}
             target={featured.url ? '_blank' : undefined}
             rel="noopener noreferrer"
-            className="group block w-full bg-white border border-ink/[0.08] rounded-xl p-8 mb-6 hover:-translate-y-1 hover:border-accent/30 transition-all duration-200"
+            className="group block w-full bg-white border border-ink/[0.08] rounded-xl p-5 lg:p-8 mb-6 hover:-translate-y-1 hover:border-accent/30 transition-all duration-200"
           >
             <span className="font-body text-[9px] uppercase tracking-[2px] text-accent">
               {featured.tag}

@@ -34,7 +34,7 @@ export default function Skills() {
   const { ref, inView } = useInView({ threshold: 0.15 })
 
   return (
-    <section ref={ref} className="bg-white py-24 px-6 lg:px-20">
+    <section ref={ref} className="bg-white py-16 lg:py-24 px-5 lg:px-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}

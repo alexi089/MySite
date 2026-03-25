@@ -60,7 +60,7 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 flex flex-col lg:flex-row min-h-screen">
         {/* Left — text content */}
-        <div className="flex flex-col justify-center px-10 lg:px-20 pt-24 pb-16 lg:w-1/2">
+        <div className="flex flex-col justify-center px-5 lg:px-20 pt-24 pb-16 lg:w-1/2">
           <motion.div {...fadeUp(0.1)}>
             <p className="eyebrow text-ink/35 mb-4">Software Developer</p>
           </motion.div>

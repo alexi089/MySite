@@ -79,7 +79,7 @@ export default function About() {
   const { ref, inView } = useInView({ threshold: 0.1 })
 
   return (
-    <section ref={ref} className="relative bg-void py-24 px-6 lg:px-20 overflow-hidden">
+    <section ref={ref} className="relative bg-void py-16 lg:py-24 px-5 lg:px-20 overflow-hidden">
       <ParticleCanvas />
 
       <div className="relative z-10 max-w-[680px]">

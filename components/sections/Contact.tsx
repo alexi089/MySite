@@ -11,7 +11,7 @@ export default function Contact() {
 
   return (
     <>
-      <section ref={ref} className="bg-ink py-24 px-6 lg:px-20">
+      <section ref={ref} className="bg-ink py-16 lg:py-24 px-5 lg:px-20">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
