@@ -39,15 +39,15 @@ export const projects: Project[] = [
     tag: 'Python · Automation',
     title: 'Discord Demo Bot',
     description:
-      'Python automation bot running on Linux. Resolved architecture-level issues at scale and built reliable automation workflows on top of the Discord API.',
+      'Python bot with Discord API integration. Diagnosed and resolved architecture-level issues at scale, built reliable automation workflows, and handled real-world edge cases in production.',
     featured: false,
   },
   {
-    id: 'opneclaw',
+    id: 'openclaw',
     tag: 'AI · Agentic Systems',
     title: 'OpenClaw / ArbTrade',
     description:
-      'Autonomous agentic AI system with Discord and SMS integration. Handles tasks independently — routing, notifications, and decision-making without human-in-the-loop.',
+      'Early deep-dive into agentic AI systems — explored how autonomous task routing, Discord/SMS integration, and decision-making pipelines work in practice. Built a strong foundation in agentic architecture before applying it to my own projects.',
     featured: false,
   },
 ]

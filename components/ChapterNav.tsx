@@ -25,7 +25,7 @@ export default function ChapterNav() {
         ([entry]) => {
           if (entry.isIntersecting) setActive(id)
         },
-        { threshold: 0.4 }
+        { threshold: 0, rootMargin: '-10% 0px -80% 0px' }
       )
       obs.observe(el)
       observers.push(obs)
@@ -39,7 +39,7 @@ export default function ChapterNav() {
   return (
     <>
       {/* Desktop left rail */}
-      <nav className="fixed left-10 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-6">
+      <nav className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-5 bg-white/60 backdrop-blur-sm rounded-xl px-3 py-4 border border-ink/[0.06]">
         {CHAPTERS.map(({ num, id, label }) => {
           const isActive = active === id
           return (

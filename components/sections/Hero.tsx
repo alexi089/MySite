@@ -60,7 +60,7 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 flex flex-col lg:flex-row min-h-screen">
         {/* Left — text content */}
-        <div className="flex flex-col justify-center px-5 lg:px-20 pt-24 pb-16 lg:w-1/2">
+        <div className="flex flex-col justify-center px-5 lg:px-20 pt-20 pb-12 lg:w-1/2 min-h-screen">
           <motion.div {...fadeUp(0.1)}>
             <p className="eyebrow text-ink/35 mb-4">Software Developer</p>
           </motion.div>
@@ -69,13 +69,13 @@ export default function Hero() {
             {...fadeUp(0.2)}
             className="leading-none"
           >
-            <span className="block font-display font-extrabold text-[clamp(52px,8vw,88px)] tracking-[-3px] text-ink">
+            <span className="block font-display font-extrabold text-[clamp(56px,7vw,96px)] tracking-[-3px] text-ink">
               I build
             </span>
-            <span className="block font-editorial text-[clamp(56px,8.5vw,92px)] text-accent italic leading-[0.95]">
+            <span className="block font-editorial text-[clamp(60px,7.5vw,100px)] text-accent italic leading-[0.92]">
               things that
             </span>
-            <span className="block font-display font-extrabold text-[clamp(52px,8vw,88px)] tracking-[-3px] text-ink">
+            <span className="block font-display font-extrabold text-[clamp(56px,7vw,96px)] tracking-[-3px] text-ink">
               matter.
             </span>
           </motion.h1>
@@ -102,7 +102,7 @@ export default function Hero() {
           </motion.div>
 
           {/* Scroll hint */}
-          <p className="font-body text-[11px] tracking-[2px] text-ink/30 uppercase mt-auto pt-16">
+          <p className="font-body text-[11px] tracking-[2px] text-ink/30 uppercase mt-12">
             scroll to explore ↓
           </p>
         </div>
