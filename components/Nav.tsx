@@ -14,7 +14,12 @@ export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 60)
+      // Drive scroll progress bar via CSS variable
+      const progress = window.scrollY / (document.body.scrollHeight - window.innerHeight)
+      document.documentElement.style.setProperty('--scroll-progress', String(progress))
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -23,28 +28,28 @@ export default function Nav() {
     <>
       <header
         className={clsx(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-200',
+          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
           scrolled
-            ? 'bg-[rgba(248,247,244,0.85)] backdrop-blur-[12px] border-b border-ink/5'
+            ? 'bg-[rgba(242,237,228,0.88)] backdrop-blur-[14px] border-b border-ink/8'
             : 'bg-transparent'
         )}
       >
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
-          {/* Wordmark */}
+        <div className="max-w-[1400px] mx-auto px-8 lg:px-12 h-[68px] flex items-center justify-between">
+          {/* Wordmark — Cormorant italic for Renaissance feel */}
           <a
             href="#hero"
-            className="font-display font-bold text-[22px] text-ink tracking-tight"
+            className="font-editorial italic text-[22px] text-ink tracking-tight leading-none"
           >
-            AE.
+            Alex Eshaya
           </a>
 
           {/* Desktop links */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-10">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="font-body text-[14px] text-ink/60 hover:text-ink transition-colors duration-150"
+                className="font-body text-[11px] uppercase tracking-[0.18em] text-muted hover:text-ink transition-colors duration-200"
               >
                 {link.label}
               </a>
@@ -55,9 +60,9 @@ export default function Nav() {
           <div className="flex items-center gap-4">
             <a
               href="#contact"
-              className="hidden md:inline-flex items-center px-5 py-2 rounded-full bg-accent text-white font-body text-[14px] hover:opacity-90 transition-opacity"
+              className="hidden md:inline-flex items-center gap-2 font-body text-[11px] uppercase tracking-[0.15em] text-ink border-b border-ink/40 pb-[2px] hover:border-ink transition-colors duration-200"
             >
-              Say Hello
+              Say Hello <span className="text-accent">→</span>
             </a>
 
             {/* Hamburger */}
@@ -66,9 +71,9 @@ export default function Nav() {
               onClick={() => setMenuOpen((o) => !o)}
               aria-label="Toggle menu"
             >
-              <span className={clsx('block w-5 h-[1.5px] bg-ink transition-all duration-200', menuOpen && 'rotate-45 translate-y-[6.5px]')} />
-              <span className={clsx('block w-5 h-[1.5px] bg-ink transition-all duration-200', menuOpen && 'opacity-0')} />
-              <span className={clsx('block w-5 h-[1.5px] bg-ink transition-all duration-200', menuOpen && '-rotate-45 -translate-y-[6.5px]')} />
+              <span className={clsx('block w-5 h-[1px] bg-ink transition-all duration-200', menuOpen && 'rotate-45 translate-y-[6px]')} />
+              <span className={clsx('block w-5 h-[1px] bg-ink transition-all duration-200', menuOpen && 'opacity-0')} />
+              <span className={clsx('block w-5 h-[1px] bg-ink transition-all duration-200', menuOpen && '-rotate-45 -translate-y-[6px]')} />
             </button>
           </div>
         </div>
@@ -77,16 +82,17 @@ export default function Nav() {
       {/* Mobile fullscreen overlay */}
       <div
         className={clsx(
-          'fixed inset-0 z-40 bg-white flex flex-col items-center justify-center gap-10 transition-all duration-300 md:hidden',
+          'fixed inset-0 z-40 bg-white flex flex-col items-center justify-center gap-12 transition-all duration-400 md:hidden',
           menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         )}
       >
-        {NAV_LINKS.map((link) => (
+        {NAV_LINKS.map((link, i) => (
           <a
             key={link.href}
             href={link.href}
             onClick={() => setMenuOpen(false)}
-            className="font-display font-bold text-[32px] text-ink"
+            className="font-editorial italic text-[42px] text-ink leading-none hover:text-accent transition-colors duration-200"
+            style={{ transitionDelay: `${i * 40}ms` }}
           >
             {link.label}
           </a>
@@ -94,9 +100,9 @@ export default function Nav() {
         <a
           href="#contact"
           onClick={() => setMenuOpen(false)}
-          className="mt-4 inline-flex items-center px-6 py-3 rounded-full bg-accent text-white font-body text-[16px]"
+          className="mt-6 font-body text-[11px] uppercase tracking-[0.18em] text-ink border-b border-ink pb-[2px]"
         >
-          Say Hello
+          Say Hello →
         </a>
       </div>
     </>

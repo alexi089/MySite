@@ -1,115 +1,150 @@
 'use client'
 
-import { motion, type Transition } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Terminal from '@/components/Terminal'
 
-const fadeUp = (delay: number) => ({
-  initial: { opacity: 0, y: 16 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+const ease = [0.22, 1, 0.36, 1] as [number, number, number, number]
+
+const lineReveal = (delay: number) => ({
+  initial: { y: '110%' },
+  animate: { y: '0%' },
+  transition: { duration: 1.1, delay, ease },
 })
 
-const fadeIn = (delay: number) => ({
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  transition: { duration: 0.8, delay, ease: 'easeOut' } as Transition,
+const fadeUp = (delay: number) => ({
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.9, delay, ease },
 })
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen overflow-hidden bg-white">
-      {/* Grid layer */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(13,13,13,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(13,13,13,0.04) 1px, transparent 1px)',
-          backgroundSize: '48px 48px',
-        }}
-      />
 
-      {/* Warm amber orb — top right */}
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          top: '-150px',
-          right: '-100px',
-          width: '600px',
-          height: '600px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(255,200,80,0.14) 0%, transparent 65%)',
-        }}
-      />
+      {/* Parchment gradient orbs */}
+      <div className="absolute pointer-events-none" style={{
+        top: '-200px', right: '-120px',
+        width: '700px', height: '700px',
+        borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(83,64,193,0.07) 0%, transparent 65%)',
+      }} />
+      <div className="absolute pointer-events-none" style={{
+        bottom: '-80px', left: '-100px',
+        width: '560px', height: '560px',
+        borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(184,151,106,0.1) 0%, transparent 60%)',
+      }} />
 
-      {/* Cool blue orb — bottom left */}
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          bottom: '-100px',
-          left: '-80px',
-          width: '500px',
-          height: '500px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(42,92,255,0.09) 0%, transparent 65%)',
-        }}
-      />
+      {/* Subtle grid */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        backgroundImage: 'linear-gradient(rgba(28,23,20,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(28,23,20,0.03) 1px, transparent 1px)',
+        backgroundSize: '56px 56px',
+      }} />
 
-      {/* Grain overlay */}
-      <div className="grain absolute inset-0 pointer-events-none opacity-60" />
+      {/* Grain */}
+      <div className="grain absolute inset-0 pointer-events-none opacity-50" />
+
+      {/* Floating decorative text */}
+      <motion.span
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.8 }}
+        className="absolute top-[28%] right-[6%] font-editorial italic text-[13px] text-muted/40 tracking-wide hidden lg:block pointer-events-none"
+      >
+        Full-Stack Engineer
+      </motion.span>
+      <motion.span
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 2.1 }}
+        className="absolute top-[48%] right-[10%] font-editorial italic text-[12px] text-muted/30 tracking-wide hidden lg:block pointer-events-none"
+      >
+        Anno MMXXVI
+      </motion.span>
+
+      {/* Floating circle */}
+      <motion.div
+        initial={{ opacity: 0, rotate: 0 }}
+        animate={{ opacity: 1, rotate: 12 }}
+        transition={{ duration: 1.5, delay: 1.5 }}
+        className="absolute top-[12%] right-[14%] w-[280px] h-[280px] rounded-full border border-accent/10 pointer-events-none hidden lg:block"
+      />
 
       {/* Content */}
       <div className="relative z-10 flex flex-col lg:flex-row min-h-screen">
-        {/* Left — text content */}
-        <div className="flex flex-col justify-center px-5 lg:px-20 pt-20 pb-12 lg:w-1/2 min-h-screen">
-          <motion.div {...fadeUp(0.1)}>
-            <p className="eyebrow text-ink/35 mb-4">Software Developer</p>
+
+        {/* Left — text */}
+        <div className="flex flex-col justify-end px-8 lg:px-20 pt-32 pb-20 lg:w-[55%] min-h-screen">
+
+          <motion.p {...fadeUp(0.1)} className="eyebrow-gold mb-6">
+            Software Developer — Winter &apos;26
+          </motion.p>
+
+          <h1 className="leading-none mb-8">
+            <span className="block reveal-overflow">
+              <motion.span
+                {...lineReveal(0.2)}
+                className="block font-display font-extrabold text-[clamp(52px,7vw,92px)] tracking-[-2px] text-ink"
+              >
+                I build
+              </motion.span>
+            </span>
+            <span className="block reveal-overflow">
+              <motion.span
+                {...lineReveal(0.32)}
+                className="block font-editorial text-[clamp(56px,7.5vw,98px)] text-accent italic leading-[0.9]"
+              >
+                things that
+              </motion.span>
+            </span>
+            <span className="block reveal-overflow">
+              <motion.span
+                {...lineReveal(0.44)}
+                className="block font-display font-extrabold text-[clamp(52px,7vw,92px)] tracking-[-2px] text-ink"
+              >
+                matter.
+              </motion.span>
+            </span>
+          </h1>
+
+          <motion.p {...fadeUp(0.7)} className="font-body text-[15px] leading-[1.75] text-muted max-w-[380px] mb-8">
+            Full-stack developer building clean, functional software. Longitude Marine and more — shipped, not just designed.
+          </motion.p>
+
+          <motion.div {...fadeUp(0.85)} className="flex flex-wrap gap-4 mb-16">
+            <a
+              href="#work"
+              className="inline-flex items-center gap-2 px-7 py-3 bg-ink text-white font-body text-[12px] uppercase tracking-[0.12em] hover:bg-accent transition-colors duration-300 rounded-sm"
+            >
+              View My Work
+            </a>
+            <a
+              href="#about"
+              className="inline-flex items-center gap-2 px-7 py-3 border border-ink/25 text-ink font-body text-[12px] uppercase tracking-[0.12em] hover:border-ink/60 transition-colors duration-300 rounded-sm"
+            >
+              About Me
+            </a>
           </motion.div>
 
-          <motion.h1
-            {...fadeUp(0.2)}
-            className="leading-none"
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+            className="flex items-center gap-3"
           >
-            <span className="block font-display font-extrabold text-[clamp(56px,7vw,96px)] tracking-[-3px] text-ink">
-              I build
-            </span>
-            <span className="block font-editorial text-[clamp(60px,7.5vw,100px)] text-accent italic leading-[0.92]">
-              things that
-            </span>
-            <span className="block font-display font-extrabold text-[clamp(56px,7vw,96px)] tracking-[-3px] text-ink">
-              matter.
-            </span>
-          </motion.h1>
-
-          <motion.div {...fadeUp(0.4)}>
-            <p className="font-body text-[16px] leading-[1.625] text-ink/55 max-w-[380px] mt-5">
-              Full-stack developer building clean, functional software. Longitude Marine and more — shipped, not just designed.
-            </p>
-
-            <div className="flex flex-wrap gap-3 mt-7">
-              <a
-                href="#work"
-                className="inline-flex items-center px-6 py-3 rounded-full bg-accent text-white font-body text-[14px] hover:opacity-90 transition-opacity"
-              >
-                View My Work
-              </a>
-              <a
-                href="#about"
-                className="inline-flex items-center px-6 py-3 rounded-full border border-ink/20 text-ink font-body text-[14px] hover:border-ink/40 transition-colors"
-              >
-                About Me
-              </a>
-            </div>
+            <span className="font-body text-[10px] tracking-[0.22em] text-muted/50 uppercase">Scroll</span>
+            <span className="w-10 h-[1px] bg-muted/30" />
           </motion.div>
-
-          {/* Scroll hint */}
-          <p className="font-body text-[11px] tracking-[2px] text-ink/30 uppercase mt-12">
-            scroll to explore ↓
-          </p>
         </div>
 
         {/* Right — terminal */}
-        <div className="hidden lg:flex items-center justify-center lg:w-1/2 pr-10 lg:pr-20">
-          <motion.div {...fadeIn(0.6)} className="w-full max-w-[420px]">
+        <div className="hidden lg:flex items-center justify-center lg:w-[45%] pr-12 lg:pr-20">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.8, ease }}
+            className="w-full max-w-[400px]"
+          >
             <Terminal />
           </motion.div>
         </div>

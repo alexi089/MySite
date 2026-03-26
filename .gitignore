@@ -40,3 +40,8 @@ backend/.venv/
 
 # environment files
 .env.local
+
+# agent worktrees / planning artifacts
+.worktrees/
+docs/superpowers/
+

@@ -1,8 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
-import { useInView } from '@/hooks/useInView'
+import { motion, useInView } from 'framer-motion'
 
 function ParticleCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -22,13 +21,13 @@ function ParticleCanvas() {
     resize()
     window.addEventListener('resize', resize)
 
-    const dots = Array.from({ length: 50 }, () => ({
+    const dots = Array.from({ length: 60 }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      r: Math.random() * 1.2 + 0.3,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      o: Math.random() * 0.14 + 0.04,
+      r: Math.random() * 1.4 + 0.3,
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+      o: Math.random() * 0.12 + 0.03,
     }))
 
     const animate = () => {
@@ -42,7 +41,7 @@ function ParticleCanvas() {
         if (d.y > canvas.height) d.y = 0
         ctx.beginPath()
         ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(42,92,255,${d.o})`
+        ctx.fillStyle = `rgba(131,109,224,${d.o})`
         ctx.fill()
       })
       animId = requestAnimationFrame(animate)
@@ -60,15 +59,18 @@ function ParticleCanvas() {
 
 const INTERESTS = ['Hardstyle', 'Tennis', 'Paddle Sports', 'Gym', 'Travel', 'Competitive Gaming', 'German', 'Aramaic']
 
+const ease = [0.22, 1, 0.36, 1] as [number, number, number, number]
+
 function RevealParagraph({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
-  const { ref, inView } = useInView({ threshold: 0.3 })
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-60px' })
   return (
     <motion.p
       ref={ref}
-      initial={{ opacity: 0.32 }}
-      animate={inView ? { opacity: 0.92 } : { opacity: 0.32 }}
-      transition={{ duration: 0.6, delay, ease: 'easeOut' }}
-      className="font-body text-[16px] leading-[1.75] text-white mb-5"
+      initial={{ opacity: 0.2, y: 12 }}
+      animate={inView ? { opacity: 0.88, y: 0 } : {}}
+      transition={{ duration: 0.9, delay, ease }}
+      className="font-body text-[16px] leading-[1.8] text-white mb-6"
     >
       {children}
     </motion.p>
@@ -76,59 +78,76 @@ function RevealParagraph({ children, delay = 0 }: { children: React.ReactNode; d
 }
 
 export default function About() {
-  const { ref, inView } = useInView({ threshold: 0.1 })
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section ref={ref} className="relative bg-void py-16 lg:py-24 px-5 lg:px-20 overflow-hidden">
+    <section className="relative bg-void py-24 lg:py-36 px-8 lg:px-20 overflow-hidden">
       <ParticleCanvas />
 
-      <div className="relative z-10 max-w-[680px]">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <p className="eyebrow text-white/25 mb-4">III — About</p>
-          <h2 className="font-display font-extrabold text-[clamp(40px,5.5vw,64px)] tracking-tight text-white mb-10">
-            Who I am.
-          </h2>
-        </motion.div>
+      {/* Decorative large glyph */}
+      <span className="absolute right-[-20px] top-1/2 -translate-y-1/2 font-editorial italic text-[22rem] font-bold text-white/[0.025] leading-none pointer-events-none select-none hidden lg:block">
+        A
+      </span>
 
-        <div>
-          <RevealParagraph delay={0.1}>
-            I&apos;m <strong className="text-white/92">Alex Eshaya</strong> — a full-stack developer who
-            graduated from <strong className="text-white/92">Wayne State University</strong> with a CS
+      <div className="relative z-10 max-w-[700px]">
+        <motion.p
+          ref={ref}
+          initial={{ opacity: 0, x: -12 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.7, ease }}
+          className="eyebrow text-purple-light/60 mb-6"
+        >
+          03 — About
+        </motion.p>
+
+        <div className="reveal-overflow mb-12">
+          <motion.h2
+            initial={{ y: '100%' }}
+            animate={inView ? { y: '0%' } : {}}
+            transition={{ duration: 1.0, delay: 0.1, ease }}
+            className="font-editorial italic text-[clamp(40px,5.5vw,72px)] text-white leading-none tracking-[-0.02em]"
+          >
+            Who I am.
+          </motion.h2>
+        </div>
+
+        <div className="mb-10">
+          <RevealParagraph delay={0.2}>
+            I&apos;m <strong className="text-white font-semibold">Alex Eshaya</strong> — a full-stack developer who
+            graduated from <strong className="text-white font-semibold">Wayne State University</strong> with a CS
             degree and a 3.80 GPA. My rule:{' '}
-            <span className="text-accent font-medium">
+            <span className="text-purple-light font-medium">
               once I set my mind on something, it gets done.
             </span>
           </RevealParagraph>
 
-          <RevealParagraph delay={0.2}>
+          <RevealParagraph delay={0.3}>
             I spent a year abroad in{' '}
-            <strong className="text-white/92">Munich</strong> — picking up German to B2, building across
+            <strong className="text-white font-semibold">Munich</strong> — picking up German to B2, building across
             time zones, and proving that I can ship in any environment. I speak{' '}
-            <strong className="text-white/92">English, German, and Aramaic</strong>.
+            <strong className="text-white font-semibold">English, German, and Aramaic</strong>.
           </RevealParagraph>
 
-          <RevealParagraph delay={0.3}>
+          <RevealParagraph delay={0.4}>
             In software, I&apos;m always{' '}
-            <span className="text-accent font-medium">chasing the next idea.</span> From ML models on
+            <span className="text-purple-light font-medium">chasing the next idea.</span> From ML models on
             Android to agentic AI systems — I build things that go beyond the demo. Outside the
             terminal: tennis, paddle sports, hardstyle, and competing at everything I touch.
           </RevealParagraph>
         </div>
 
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="flex flex-wrap gap-2 mt-6"
+          initial={{ opacity: 0, y: 12 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.6, ease }}
+          className="flex flex-wrap gap-2"
         >
           {INTERESTS.map((interest) => (
             <span
               key={interest}
-              className="border border-white/10 rounded-full px-3 py-1 font-body text-[11px] text-white/45"
+              className="border border-white/10 px-3 py-1.5 font-body text-[11px] text-white/40 tracking-wide uppercase hover:border-white/25 hover:text-white/60 transition-colors duration-200"
+              style={{ borderRadius: '2px' }}
             >
               {interest}
             </span>

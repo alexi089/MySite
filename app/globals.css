@@ -11,13 +11,39 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: #f8f7f4;
-    color: #0d0d0d;
+    background-color: #F2EDE4;
+    color: #1C1714;
   }
 
   body {
     font-family: var(--font-dm-sans), sans-serif;
     -webkit-font-smoothing: antialiased;
+  }
+
+  /* Scroll progress bar */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    width: 100%;
+    background: #5340C1;
+    transform-origin: left;
+    transform: scaleX(var(--scroll-progress, 0));
+    z-index: 200;
+    pointer-events: none;
+  }
+
+  /* Global noise overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.022;
+    z-index: 999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
   }
 }
 
@@ -32,5 +58,18 @@
   /* Eyebrow text style */
   .eyebrow {
     @apply font-body text-[11px] tracking-eyebrow uppercase;
+  }
+
+  /* Renaissance eyebrow — gold, wider tracking */
+  .eyebrow-gold {
+    @apply font-body text-[11px] uppercase;
+    color: #B8976A;
+    letter-spacing: 0.22em;
+  }
+
+  /* Reveal line — wraps text for translateY entrance */
+  .reveal-overflow {
+    overflow: hidden;
+    display: block;
   }
 }
